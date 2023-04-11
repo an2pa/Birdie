@@ -1,0 +1,233 @@
+
+h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.big-heading{
+  font-size: 3rem;
+  line-height: 1.5;
+  color: white;
+  position: relative;
+  margin-top: 7%;
+}
+.container-fluid{
+  padding: 3% 15% 7%;
+  background-color: rgb(58, 217, 161);
+  height: 68vh;
+}
+.navbar-brand{
+ font-family: 'Ubuntu', sans-serif;
+ font-size: 2.75rem;
+}
+.navbar{
+  padding-bottom: 50px;
+  background-color: rgb(58, 217, 161);
+}
+.birdie1{
+  margin-bottom: auto;
+  width: 10%;
+}
+.signtext{
+  margin-bottom: 10%;
+  margin-left: -10%;
+  width: 120%;
+}
+.nav-item{
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.nav-link {
+  color: white;
+  font-size: 1.25rem;
+}
+.titleimage{
+  z-index: 1;
+}
+.btn-light{
+  color: rgb(120, 120, 120);
+}
+.pastadiv{
+  z-index: 1;
+  margin-top: 7%;
+}
+a{
+  text-decoration:none;
+  color: white;
+}
+a:hover{
+  color: rgb(58, 217, 161);
+}
+/*Define the keyframe*/
+
+
+@media (max-width: 1028px ){
+  .titleimage{
+      width: 110%;   
+  }
+  .birdie1{
+    width: 20%;
+    margin-right: 10px;
+  }
+  #intro{
+      text-align: center;
+  }
+  .container-fluid{
+    height: 120vh;
+  }
+}
+
+/*LOGIN PAGE*/
+
+.form-signin{
+  width: 70%;
+  margin-top: 50px;
+  margin-left: 70px;
+  text-align: center;
+}
+.rowlogin{
+  height: 100vh;
+  background-color: rgb(255, 255, 255)
+}
+.bg-image{
+  background-image: url("/imgs/bgound.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vh;
+  
+}
+.login{
+  background-color: rgb(217, 217, 217);
+  margin-top: 100px;
+  padding-bottom:25% ;
+  margin-left: 8%;
+  border-radius: 10%;
+  height: 74vh;
+  width: 30%;
+  color: white;
+}
+.unos{
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 2%;
+}
+.noacc{
+  background-color:rgb(217, 217, 217) ;
+  border: 0px;
+  margin-top: 10px;
+  color: white;
+}
+.myalert{
+  color: red;
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+
+
+/*SIGNUP*/
+
+
+.signup{
+  background-color: rgb(217, 217, 217);
+  margin-top: 2%;
+  margin-left: 8%;
+  border-radius: 10%;
+  height: 90%;
+  width: 30%;
+  color: white;
+}
+.form-signup{
+  margin-top: 10%;
+}
+.signupText{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+@media (max-width: 1028px ){
+  .bg-image{
+      display: none;   
+  }
+  .form-signin{
+    width: 60%;
+    margin-top:30px;
+  }
+  .signup{
+    margin-top: 2%;
+    margin-left: 70px;
+    height: 90vh;
+    width: 80%;
+  }
+  .login{
+    margin-top: 18%;
+    margin-left: 10%;
+    height: 70vh;
+    width: 80%;
+    padding-bottom: auto;
+  }
+  .birdie{
+    width:15% ;
+  }
+}
+
+
+/*MENU*/
+.secondrow{
+    text-align: center;
+    background-color: rgb(58, 217, 161);
+    color: white;
+    border: solid;
+    border-radius: 70%;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    margin-left: 150px;
+}
+
+.secondrow:hover{
+  background-color: rgb(255, 255, 255);
+  color: rgb(58, 217, 161);
+}
+.ikone{
+    font-size: 50px;
+}
+.menuTitle{
+  /*margin-left: 150px;*/
+  margin-bottom: 50px;
+}
+
+#menu{
+    padding:150px 150px;
+    background-color: white;
+    position: relative;
+    text-align: center;
+    color: rgb(58, 217, 161);
+}
+@media (max-width: 1028px ){
+  .secondrow{
+    margin-left: auto;     
+  }
+  .menuTitle{
+    margin-left: auto;
+  }
+  #menu{
+    text-align: center;
+  }
+
+}
+
+
+
+/*backToTop*/
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: rgb(58, 217, 161);
+  color: white;
+  }
+  #btn-back-to-top:hover{
+  color: rgb(58, 217, 161);
+  border: solid;
+  background-color: white;
+  }
+

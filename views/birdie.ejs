@@ -1,0 +1,46 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Birdie</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+
+  <body >
+    <div class="row rowlogin no-gutter">
+      <div class="col-lg-6  bg-image ">
+       
+      </div>
+     <div class="col-lg-6 signup">
+        <form class="form-signin form-signup " action="/" method="post" > 
+          <img id="image" src="imgs/birdie.png" style="height:20% ;" >
+        
+          <h3 class="signtext"><%=signText%></h3>
+          <input type="text" name="inputFirstName" id="inputFirstName" class="unos form-control " placeholder="Username"  autofocus autocomplete="off">
+       
+          <input type="text" name="address" id="inputAddress" class="unos form-control middle" placeholder="Address" required autofocus autocomplete="off">
+          <input type="number" name="number" id="inputNumber" class="unos form-control middle" placeholder="Phone number" required autofocus autocomplete="off">
+          <input type="email" name="email" id="inputEmail" class="unos form-control middle" placeholder="Email address" required autofocus autocomplete="off">
+  
+          <input type="password" name="password" id="inputPassword" class="unos form-control" placeholder="Password" required autocomplete="off">
+          <button class="btn btn-lg btn-light" style="margin-top:30px" type="submit">Register</button>
+        </form>
+  </div>
+  </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
