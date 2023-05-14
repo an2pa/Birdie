@@ -231,3 +231,51 @@ a:hover{
   background-color: white;
   }
 
+/*-----------------*/
+#sandwich {
+  margin-top: 50px;
+}
+
+#sandwich .menuTitle {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+#sandwich .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#sandwich .menu-item {
+  padding-top: 10px;
+  text-align: center;
+  margin: 20px;
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#sandwich .menu-item img {
+  border-radius: 10px 10px 0 0;
+}
+
+#sandwich .menu-item h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+#sandwich .menu-item p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+#sandwich .menu-item .price {
+  display: block;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
