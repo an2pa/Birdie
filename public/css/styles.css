@@ -12,7 +12,7 @@ h1,h2,h3{
 }
 .container-fluid{
   padding: 3% 15% 7%;
-  background-color: rgb(58, 217, 161);
+  background-color:  #009688;;
   height: 68vh;
 }
 .navbar-brand{
@@ -21,7 +21,7 @@ h1,h2,h3{
 }
 .navbar{
   padding-bottom: 50px;
-  background-color: rgb(58, 217, 161);
+  background-color:  #009688;
 }
 .birdie1{
   margin-bottom: auto;
@@ -56,7 +56,7 @@ a{
   color: white;
 }
 a:hover{
-  color: rgb(58, 217, 161);
+  color:  #009688;;
 }
 /*Define the keyframe*/
 
@@ -93,6 +93,9 @@ a:hover{
   background-image: url("/imgs/bgound.jpg");
   background-repeat: no-repeat;
   background-size: 100vh;
+  position: relative;
+  margin-left: -210px;
+  margin-top: -110px;
   
 }
 .login{
@@ -172,7 +175,7 @@ a:hover{
 /*MENU*/
 .secondrow{
     text-align: center;
-    background-color: rgb(58, 217, 161);
+    background-color:  #009688;;
     color: white;
     border: solid;
     border-radius: 70%;
@@ -184,13 +187,13 @@ a:hover{
 
 .secondrow:hover{
   background-color: rgb(255, 255, 255);
-  color: rgb(58, 217, 161);
+  color:  #009688;
 }
 .ikone{
     font-size: 50px;
 }
-.menuTitle{
-  /*margin-left: 150px;*/
+.menuTitle1{
+  margin-left: 150px;
   margin-bottom: 50px;
 }
 
@@ -198,8 +201,9 @@ a:hover{
     padding:150px 150px;
     background-color: white;
     position: relative;
+    left: -80px;
     text-align: center;
-    color: rgb(58, 217, 161);
+    color:  #009688;;
 }
 @media (max-width: 1028px ){
   .secondrow{
@@ -222,11 +226,11 @@ a:hover{
   bottom: 20px;
   right: 20px;
   display: none;
-  background-color: rgb(58, 217, 161);
+  background-color:  #009688;;
   color: white;
   }
   #btn-back-to-top:hover{
-  color: rgb(58, 217, 161);
+  color:  #009688;;
   border: solid;
   background-color: white;
   }
@@ -247,14 +251,14 @@ a:hover{
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px #ddd;
   text-align: center;
-  max-width: 280px;
+  width: 280px;
 }
 
 
-.menu-item img {
+.price-imgs {
   margin-bottom: 1rem;
-  width: 100%;
-  height: auto;
+  width: 50%;
+  height: 30%;
 }
 
 .menu-item h3 {
