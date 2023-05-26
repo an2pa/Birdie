@@ -296,7 +296,7 @@ a:hover{
   border-radius: 3px;
 }
 
-.menu-item .add-to-cart {
+ .add-to-cart {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   background-color: #009688;
@@ -306,7 +306,7 @@ a:hover{
   cursor: pointer;
 }
 
-.menu-item .add-to-cart:hover {
+.add-to-cart:hover {
   background-color: #00897b;
 }
 
