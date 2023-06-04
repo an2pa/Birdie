@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/birdieDB');
+        await mongoose.connect('mongodb+srv://admin-anes:test123@cluster0.qzhtq9v.mongodb.net/todolistDB');
         console.log("MongoDB connected");
     } catch (err) {
         console.log("Failed", err);
@@ -108,12 +108,6 @@ const orderSchema = new mongoose.Schema({
     message: String
 
 });
-
-
-
-
-
-
 
 
 const Menu = mongoose.model("Menu", menuSchema);
@@ -182,7 +176,12 @@ app.get("/adminView", function (req, res) {
   if(req.isAuthenticated()&&req.user.role==="admin"){
     const promise = Menu.find().exec();
     const promise1 = Order.find({ message: "Pending" }).exec();
+//v
+      const adminName = req.user.username; 
+      const orderCount = '1';
 
+  res.render('adminview', { adminName: adminName, orderCount: orderCount });
+//^
     Promise.all([promise, promise1])
         .then(function ([menu, orders]) {
             res.render("adminview", { menu: menu, orders: orders });
@@ -195,6 +194,7 @@ app.get("/adminView", function (req, res) {
     res.redirect("/adminLogin");
   }
 });
+
 
 app.get("/adminOrders", function(req,res){
   const promise1 = Order.find({ message: "Pending" }).exec();
@@ -246,8 +246,8 @@ app.get("/adminCompose", function (req, res) {
 app.get("/cart", function (req, res) {
     if (req.isAuthenticated()) {
       
-        const cartItems = req.user.cart.filter(item => item !== null); // Filter out null values from req.user.cart
-        console.log(cartItems); // Log the filtered cart items
+        const cartItems = req.user.cart.filter(item => item !== null);
+        console.log(cartItems); 
         res.render("cart", { cart: cartItems });
     } else {
       res.redirect("/login");
@@ -294,7 +294,7 @@ app.post("/addtocart", function (req, res) {
             price: menuDoc.price,
             description: menuDoc.description,
           };
-          req.user.cart.push(cartItem); // Add the cart item to the user's cart array
+          req.user.cart.push(cartItem);
           
         }
         req.user.save();
@@ -414,7 +414,7 @@ app.post("/confirmOrder", function (req, res) {
 app.post("/rejectOrder", function (req, res) {
     console.log(req.body.itemToReject)
 
-    const orderId = req.body.itemToReject; // Replace with the actual _id value
+    const orderId = req.body.itemToReject; 
 
    Order.findById(orderId)
   .then(order => {
@@ -437,7 +437,7 @@ app.post("/rejectOrder", function (req, res) {
 app.post("/acceptOrder", function (req, res) {
     console.log(req.body.itemToReject)
 
-    const orderId = req.body.itemToAccept; // Replace with the actual _id value
+    const orderId = req.body.itemToAccept; 
 
    Order.findById(orderId)
   .then(order => {
@@ -494,9 +494,37 @@ app.post("/", function(req,res){
   });
 });
 
+// Registration route
+app.post('/adminRegister', (req, res) => {
+
+});
+
+
+
 app.post("/adminRegister", function(req,res){
   User.register({username:req.body.inputFirstName, email:req.body.email, phoneNo:req.body.number, address:req.body.address, role:"admin"}, req.body.password, function(err,user){
-     
+  //
+    const username = req.body.username;
+
+    res.render('adminview', { adminName: username });
+
+    if(err){
+      console.log(err);
+      res.render("adminregister", {signText: err});
+    }
+    else{
+      req.login(user, function(err){
+        if (err) {
+          console.log(err);
+          res.redirect("/adminLogin");
+        } else {
+          res.render('adminview', {adminName: username});
+        }
+      });
+    }
+  //
+
+
       if(err){
          console.log(err);
          res.render("birdie",{signText:err});
@@ -561,5 +589,4 @@ app.post("/adminLogin", function(req,res){
 app.listen(process.env.PORT || 3000, function () {
     console.log("Server started");
 })
-
 

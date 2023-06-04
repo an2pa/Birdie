@@ -24,17 +24,17 @@
     <link href="css/styles.css" rel="stylesheet">
     <!---->
 </head>
-<body>
+<body class="orders-page">
     <% orders.forEach(function(o){ %>
   
         <h2 style="text-align: center;"">Ordered:</h2>
         <div style="text-align: center;">
-        <h3>Order status: <%=o.message%></h3>
+            
         </div>  
         <div class="row">
         <% o.cart.forEach(function(oC){ %>
-            <div class="menu-item">
-                <img class="price-imgs"
+            <div class="menu-itemsOrders">
+                <img class="price-imgsOrders"
                     src="<%= oC.url %>"
                     alt="Sudzuka sandwich">
                 <h1>
@@ -43,13 +43,14 @@
                 <h3>
                     <%= oC.title %>
                 </h3>
-                <p>
-                    <%= oC.description %>
-                </p>
+               
             </div>
         
             <% }) %>
+            <div class="order-status <%= o.status %>"></div>
+        <h4 style="color: white;">Order status: <%=o.message%> - <%= new Date(o.date).toLocaleString() %></h5>
         </div>
+        
      <% }) %>
 </body>
 </html>
