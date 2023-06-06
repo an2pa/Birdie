@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://admin-anes:test123@cluster0.qzhtq9v.mongodb.net/todolistDB');
+        await mongoose.connect('mongodb+srv://admin-anes:test123@cluster0.qzhtq9v.mongodb.net/birdieDB');
         console.log("MongoDB connected");
     } catch (err) {
         console.log("Failed", err);
@@ -173,27 +173,31 @@ app.get("/adminLogout", function (req, res) {
   res.redirect("/adminLogin");
 })
 app.get("/adminView", function (req, res) {
-  if(req.isAuthenticated()&&req.user.role==="admin"){
+  if (req.isAuthenticated() && req.user.role === "admin") {
     const promise = Menu.find().exec();
     const promise1 = Order.find({ message: "Pending" }).exec();
-//v
-      const adminName = req.user.username; 
-      const orderCount = '1';
+    const adminName = req.user.username;
+    const orderCountPromise = Order.countDocuments({ message: "Pending"}).exec(); // Use a promise for countDocuments
 
-  res.render('adminview', { adminName: adminName, orderCount: orderCount });
-//^
-    Promise.all([promise, promise1])
-        .then(function ([menu, orders]) {
-            res.render("adminview", { menu: menu, orders: orders });
-        })
-        .catch(function (error) {
-            console.log(error);
+    Promise.all([promise, promise1, orderCountPromise])
+      .then(function ([menu, orders, orderCount]) {
+        console.log(orderCount); // Log the order count
+
+        res.render("adminview", {
+          menu: menu,
+          orders: orders,
+          adminName: adminName,
+          orderCount: orderCount,
         });
-  }
-  else{
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
     res.redirect("/adminLogin");
   }
 });
+
 
 
 app.get("/adminOrders", function(req,res){
@@ -494,37 +498,12 @@ app.post("/", function(req,res){
   });
 });
 
-// Registration route
-app.post('/adminRegister', (req, res) => {
-
-});
 
 
 
 app.post("/adminRegister", function(req,res){
   User.register({username:req.body.inputFirstName, email:req.body.email, phoneNo:req.body.number, address:req.body.address, role:"admin"}, req.body.password, function(err,user){
-  //
-    const username = req.body.username;
-
-    res.render('adminview', { adminName: username });
-
-    if(err){
-      console.log(err);
-      res.render("adminregister", {signText: err});
-    }
-    else{
-      req.login(user, function(err){
-        if (err) {
-          console.log(err);
-          res.redirect("/adminLogin");
-        } else {
-          res.render('adminview', {adminName: username});
-        }
-      });
-    }
-  //
-
-
+     
       if(err){
          console.log(err);
          res.render("birdie",{signText:err});

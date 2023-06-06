@@ -23,19 +23,7 @@ $("#btn-back-to-top").click(function() {
   document.documentElement.scrollTop = 0;
 });
 
-$(document).ready(function() {
-    $('#addedtocart').on('click', function() {
-      $.post('/addToCart', function() {
-        alert('Item added to cart successfully!');
-      });
-    });
-  });
-  $(document).ready(function() {
-    // Bind the click event to the "Add to Cart" buttons
-    $(".addedtocart").on("click", function() {
-      alert("Added to cart successfully");
-    });
-  });
+
   
 
   
