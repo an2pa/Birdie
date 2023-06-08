@@ -8,9 +8,11 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body class="admin-page">
-    <h1 id="admin-title">Hello Birdie admin.. <br> Here you can manage your menu!</h1>
+    <h1 id="admin-title">Hello <%= adminName %> <br> Here you can manage the menu!</h1>
     <div id="menu-item-container">
+        
         <form id="admin-form" action="/adminCompose" method="post" enctype="multipart/form-data">           
+            <label for="menuImg">Add image</label>
             <input type="file" name="photo" accept="image/*">      
             <label for="menuType">Type</label>
             <input type="text" name="menuType" id="menuType"> 
@@ -20,7 +22,7 @@
             <input type="number" name="menuPrice" id="menuPrice">
             <label for="menuDescription">Description</label>
             <input type="text" name="menuDescription" id="menuDescription">
-            <button type="submit" id="publish-btn" class="btn btn-primary">Publish</button>
+            <button type="submit" id="publish-btn" class="btn btn-primary">Add to menu</button>
         </form>
     </div>
 </body>

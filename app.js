@@ -148,11 +148,11 @@ app.get("/home", function (req, res) {
      //   console.log(burgerDocs);
         if (req.isAuthenticated()) {
             console.log("authetnic")
-            res.render("home", { url: "/logout", buttonText: "logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
+            res.render("home", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
         }
         else {
             console.log("not")
-            res.render("home", { url: "/login", buttonText: "login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
+            res.render("home", { url: "/login", buttonText: "Login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
         }
     })
 
@@ -239,7 +239,7 @@ app.get("/adminMenu",function(req,res){
 
 app.get("/adminCompose", function (req, res) {
   if(req.isAuthenticated()&&req.user.role==="admin"){
-    res.render("admin")
+    res.render("admin",{adminName: req.user.username})
   }
   else{
     res.redirect("/adminLogin")
