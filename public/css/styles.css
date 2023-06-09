@@ -30,7 +30,8 @@ h1,h2,h3{
 #intro .container-fluid{
   padding: 3% 15% 7%;
   background-color:  #009688;;
-  height: 60vh;
+  height: 67vh;
+  margin-bottom: 200px;
 }
 .navbar-brand{
  font-family: 'Ubuntu', sans-serif;
@@ -74,7 +75,8 @@ h1,h2,h3{
 }
 .pastadiv{
   z-index: 1;
-  margin-top: 7%;
+  margin-top: 10%;
+
 }
 a{
   text-decoration:none;
@@ -277,8 +279,58 @@ a:hover{
   box-shadow: 0px 0px 10px 0px #ddd;
   text-align: center;
   width: 280px;
-
 }
+.menu-item-cart {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px #ddd;
+  text-align: center;
+ 
+}
+.menu-item-cart {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 550px;
+  height: 50px;
+  position: relative;
+}
+
+.item-details {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.item-title {
+  margin: 0;
+  position: relative;
+  left: 10px;
+  top: 5px;
+}
+
+.item-price {
+  font-weight: bold;
+  position: absolute;
+  right: 90px;
+  bottom: 13px;
+}
+
+#delete-button {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+ 
+  border: none;
+  border-radius: 3px;
+}
+
 
 
 .price-imgs {
@@ -444,7 +496,10 @@ body.adminPage {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 330px;
 }
+
+
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -576,7 +631,7 @@ body.orders-page {
     padding:50px 0;
     background-color:#00897b;
     color:#ffffff;
-    margin-top: 300px;
+    margin-top: 100px;
     
     
   }
@@ -668,6 +723,25 @@ body.orders-page {
     margin-bottom:0;
     font-size:13px;
     opacity:0.6;
+  }
+  .menuDiv {
+    position: relative;
+  }
+  
+  .cartElement {
+    position: sticky;
+    top: 100px; /* Adjust the top value based on your desired distance from the top */
+    left: 80%; /* Adjust the right value based on your desired distance from the right */
+    width: 450px; /* Adjust the width as needed */
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  .itemi{
+    position: relative;
+    top: -600px;
+    width: 70%;
   }
   
   /*****************************/
