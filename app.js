@@ -146,13 +146,18 @@ app.get("/home", function (req, res) {
      //   console.log(beefDocs);
         const burgerDocs = doc.filter(item => item.type === 'burger');
      //   console.log(burgerDocs);
+     
+       
+        //cart
         if (req.isAuthenticated()) {
+          const cartItems = req.user.cart.filter(item => item !== null);
+        console.log(cartItems); 
             console.log("authetnic")
-            res.render("home", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
+            res.render("home", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: cartItems })
         }
         else {
             console.log("not")
-            res.render("home", { url: "/login", buttonText: "Login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
+            res.render("home", { url: "/login", buttonText: "Login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: [] })
         }
     })
 
@@ -347,7 +352,7 @@ app.post("/deletefromcart", function (req, res) {
     console.log(cartItem);
     req.user.cart = req.user.cart.filter(item => item !== cartItem);
     req.user.save();
-    res.redirect("/cart");
+    res.redirect("/home");
 })
 app.post("/deletefrommenu", function (req, res) {
   var itemToDelete = req.body.itemName
@@ -411,7 +416,7 @@ app.post("/confirmOrder", function (req, res) {
         req.user.cart.splice(0, req.user.cart.length);
         req.user.save();
 
-        res.redirect("/cart")
+        res.redirect("/home")
     }
 })
 
