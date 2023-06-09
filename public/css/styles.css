@@ -10,7 +10,8 @@ header {
 }
 
 
-
+h5{font-family: 'Montserrat', sans-serif;
+color: #00897b;}
 
 h1,h2,h3{
   font-family: 'Montserrat', sans-serif;
@@ -85,7 +86,6 @@ a{
 a:hover{
   color:  #009688;;
 }
-/*Define the keyframe*/
 
 
 @media (max-width: 1028px ){
@@ -501,7 +501,6 @@ body.adminPage {
 
 
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .menu-item {
     flex-basis: calc(50% - 2rem); 
@@ -541,45 +540,6 @@ body.adminPage {
   margin-left: 2cm;
   margin-top: 2cm;
 }
-.menu-itemsOrders {
-  flex-basis: calc(20% - 0.8rem);
-  margin: 0.4rem;
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0px 0px 3px 0px #ddd;
-  text-align: center;
-  width: 150px;
-  height: 250px;
-}
-.price-imgsOrders {
-  margin-bottom: 0.5rem;
-  width: 70%; 
-  height: 70%; 
-}
-.menu-itemsOrders p{
-  margin-bottom: 0.2rem;
-  font-size: 1.1rem;
-}
-body.orders-page {
-  background-color: #00897b;
-  color: rgba(39, 38, 38, 0.923);
-}
-.order-status{
-  color:white;
-}
-
- .order-info {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: #009688;
-      color: white;
-      padding: 10px;
-      font-size: 12px;
-      border-top-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
 
 .menu-itemAdminOrders {
       width: 11rem;
@@ -730,9 +690,9 @@ body.orders-page {
   
   .cartElement {
     position: sticky;
-    top: 100px; /* Adjust the top value based on your desired distance from the top */
-    left: 80%; /* Adjust the right value based on your desired distance from the right */
-    width: 450px; /* Adjust the width as needed */
+    top: 100px; 
+    left: 80%; 
+    width: 450px;
     min-height: 500px;
     max-height: 500px;
     overflow-y: auto;
@@ -746,67 +706,6 @@ body.orders-page {
   
   /*****************************/
 
-  body.orders-page {
-    background-color: #f7f7f7;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.orders-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.order-section {
-    margin-bottom: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.order-title {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
-    margin-bottom: 20px;
-}
-
-.menu-itemsOrders {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
-}
-
-.price-imgsOrders {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 15px;
-  flex-shrink: 0;
-}
-
-.order-status {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-left: auto;
-}
-
-.order-date {
-    text-align: right;
-    color: #888;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.menu-itemsOrders > div {
-  flex-grow: 1;
-}
-.orders-page {
-  background-color: #009688;
-}
 
 
 
@@ -845,7 +744,6 @@ body.orders-page {
   width: 100px;
 }
 
-/* Mobile view adjustments */
 @media screen and (max-width: 768px) {
   .display-3 {
       font-size: 2.5rem;
@@ -880,4 +778,96 @@ font-size: 1.25rem;
 }
 
 
+/*-------------------*/
 
+
+.orders-page {
+  background-color: #f9f9f9;
+}
+
+.orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.order-section {
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.order-title {
+  color: #00897b;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.custom-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.menu-itemsOrders {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  flex-basis: 300px;
+}
+
+.price-imgsOrders {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+.menu-itemsOrders h1 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.menu-itemsOrders h5 {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+.order-status {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.order-status.accepted {
+  background-color: black; 
+  color: #28a745;
+}
+
+.order-status.rejected {
+  background-color:black ; /* Red color for rejected orders */
+  color: #dc3545;
+}
+
+
+.order-date {
+  display: block;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-itemsOrders {
+      flex-basis: auto;
+  }
+}

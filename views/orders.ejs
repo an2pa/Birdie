@@ -16,10 +16,8 @@
   
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
   
-    <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
     
     <style>
@@ -28,26 +26,30 @@
 </head>
 <body class="orders-page">
     <div class="orders-container">
-        <% orders.forEach(function(o){ %>
-            <div class="order-section">
-                <h2 class="order-title">Ordered:</h2>
-                <div style="text-align: center;"></div>  
-                <div class="row">
-                <% o.cart.forEach(function(oC){ %>
-                    <div class="menu-itemsOrders">
-                        <img class="price-imgsOrders"
-                            src="<%= oC.url %>"
-                            alt="Sudzuka sandwich">
-                        <div>
-                            <h1><%= oC.type %></h1>
-                            <h3><%= oC.title %></h3>
-                        </div>
+        <div id="tab1">
+            <% orders.forEach(function(o){ %>
+                <div class="order-section">
+                    <h2 class="order-title">Ordered:</h2>
+                    <div style="text-align: center;"></div>  
+                    <div class="custom-row">
+                        <% o.cart.forEach(function(oC){ %>
+                            <div class="menu-itemsOrders">
+                                <img class="price-imgsOrders"
+                                    src="<%= oC.url %>"
+                                    alt="Sudzuka sandwich">
+                                <div>
+                                    <h1><%= oC.type %></h1>
+                                    <h5><%= oC.title %></h5>
+                                </div>
+                            </div>
+                        <% }) %>
                     </div>
-                <% }) %>
-                <div class="order-status <%= o.status %>"></div>
-                <h4 class="order-date">Order status: <%= o.message %> - <%= new Date(o.date).toLocaleString() %></h4>
-            </div>
-         <% }) %>
+                    <div class="order-status <%= o.status %>"></div>
+                    <h5 class="order-date">Order status: <%= o.message %> - <%= new Date(o.date).toLocaleString() %></h4>
+                </div>
+            <% }) %>
+        </div>
+        
     </div>
 </body>
 </html>
