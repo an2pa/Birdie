@@ -1,3 +1,16 @@
+body, html {
+  height: 100%;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/imgs/backGROUNDADMIN.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+
+
 
 h1,h2,h3{
   font-family: 'Montserrat', sans-serif;
@@ -657,4 +670,140 @@ body.orders-page {
     opacity:0.6;
   }
   
-  
+  /*****************************/
+
+  body.orders-page {
+    background-color: #f7f7f7;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.order-section {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.order-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.menu-itemsOrders {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.price-imgsOrders {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.order-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+.order-date {
+    text-align: right;
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.menu-itemsOrders > div {
+  flex-grow: 1;
+}
+.orders-page {
+  background-color: #009688;
+}
+
+
+
+/*----------------------------*/
+
+.display-3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.card-header {
+  background-color: #F8F9FA;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer {
+  background-color: #F8F9FA;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.btn-danger, .btn-success {
+  width: 100px;
+}
+
+/* Mobile view adjustments */
+@media screen and (max-width: 768px) {
+  .display-3 {
+      font-size: 2.5rem;
+  }
+}
+.product-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.product-image {
+width: 120px;
+height: 120px;
+overflow: hidden;
+position: relative;
+}
+
+.product-img {
+max-width: 100%;
+min-height: 100%;
+object-fit: cover;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+font-size: 1.25rem;
+}
+
+
+

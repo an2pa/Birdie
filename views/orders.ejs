@@ -14,7 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
   
-  
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
   
     <!-- Bootstrap core CSS -->
@@ -22,35 +21,33 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
-    <!---->
+    
+    <style>
+       
+    </style>
 </head>
 <body class="orders-page">
-    <% orders.forEach(function(o){ %>
-  
-        <h2 style="text-align: center;"">Ordered:</h2>
-        <div style="text-align: center;">
-            
-        </div>  
-        <div class="row">
-        <% o.cart.forEach(function(oC){ %>
-            <div class="menu-itemsOrders">
-                <img class="price-imgsOrders"
-                    src="<%= oC.url %>"
-                    alt="Sudzuka sandwich">
-                <h1>
-                    <%= oC.type %>
-                </h1>
-                <h3>
-                    <%= oC.title %>
-                </h3>
-               
+    <div class="orders-container">
+        <% orders.forEach(function(o){ %>
+            <div class="order-section">
+                <h2 class="order-title">Ordered:</h2>
+                <div style="text-align: center;"></div>  
+                <div class="row">
+                <% o.cart.forEach(function(oC){ %>
+                    <div class="menu-itemsOrders">
+                        <img class="price-imgsOrders"
+                            src="<%= oC.url %>"
+                            alt="Sudzuka sandwich">
+                        <div>
+                            <h1><%= oC.type %></h1>
+                            <h3><%= oC.title %></h3>
+                        </div>
+                    </div>
+                <% }) %>
+                <div class="order-status <%= o.status %>"></div>
+                <h4 class="order-date">Order status: <%= o.message %> - <%= new Date(o.date).toLocaleString() %></h4>
             </div>
-        
-            <% }) %>
-            <div class="order-status <%= o.status %>"></div>
-        <h4 style="color: white;">Order status: <%=o.message%> - <%= new Date(o.date).toLocaleString() %></h5>
-        </div>
-        
-     <% }) %>
+         <% }) %>
+    </div>
 </body>
 </html>
