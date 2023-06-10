@@ -289,40 +289,41 @@ app.get("/orders", function(req,res){
 })
 
 
-app.post("/addtocart", function (req, res) {
-    const quant=req.body.quantity;
-    if (req.isAuthenticated()) {
-        console.log(req.body.itemName)
-      const promise = Menu.findById( req.body.itemName ).exec();
-      promise.then(function (menuDoc) {
-        if (menuDoc) {
-            for(var i=0; i<quant; i++){
+app.post("/addtocart", async function (req, res) {
+  const quant = req.body.quantity;
+
+  if (req.isAuthenticated()) {
+    try {
+      const menuDoc = await Menu.findById(req.body.itemName).exec();
+      
+      if (menuDoc) {
+        for (var i = 0; i < quant; i++) {
           const cartItem = {
-            url:menuDoc.url,
+            url: menuDoc.url,
             title: menuDoc.title,
             price: menuDoc.price,
             description: menuDoc.description,
           };
           req.user.cart.push(cartItem);
-          
         }
-        req.user.save();
-          // Save the updated user document
-          res.redirect("/home");
-        } else {
-          // Handle case when menu item is not found
-          res.redirect("/menu");
-        }
-      })
-      .catch(function (error) {
-        // Handle error during menu item retrieval
-        console.log(error);
+        
+        await req.user.save(); // Wait for the user document to be saved
+        
+        res.redirect("/home");
+      } else {
+        // Handle case when menu item is not found
         res.redirect("/menu");
-      });
-    } else {
-      res.redirect("/login");
+      }
+    } catch (error) {
+      // Handle error during menu item retrieval or saving user document
+      console.log(error);
+      res.redirect("/menu");
     }
-  });
+  } else {
+    res.redirect("/login");
+  }
+});
+
   
 /*app.post("/addtocart", function (req, res) {
     if (req.isAuthenticated()) {
@@ -344,16 +345,26 @@ app.post("/addtocart", function (req, res) {
   
 
 
-app.post("/deletefromcart", function (req, res) {
-    var itemToDelete = req.body.itemName
+  app.post("/deletefromcart", async function (req, res) {
+    var itemToDelete = req.body.itemName;
     console.log(req.body.itemName);
-    const cartItem = req.user.cart.find(item => item._id.toString() === itemToDelete);
-
+    const cartItem = await req.user.cart.find(
+      (item) => item._id.toString() === itemToDelete
+    ).exec();
+  
     console.log(cartItem);
-    req.user.cart = req.user.cart.filter(item => item !== cartItem);
-    req.user.save();
-    res.redirect("/home");
-})
+    req.user.cart = req.user.cart.filter((item) => item !== cartItem);
+    
+    try {
+      await req.user.save(); // Wait for the user document to be saved
+      res.redirect("/home");
+    } catch (error) {
+      // Handle error during user document saving
+      console.log(error);
+      res.redirect("/home");
+    }
+  });
+  
 app.post("/deletefrommenu", function (req, res) {
   var itemToDelete = req.body.itemName
   console.log(req.body.itemName);
@@ -432,7 +443,7 @@ app.post("/rejectOrder", function (req, res) {
       order.message="Rejected";
       order.save();
       console.log(order.message);
-      res.redirect("/adminView")
+      res.redirect("/adminOrders")
     } else {
       console.log('Order not found');
     }
@@ -455,7 +466,7 @@ app.post("/acceptOrder", function (req, res) {
       order.message="Accepted";
       order.save();
       console.log(order.message);
-      res.redirect("/adminView")
+      res.redirect("/adminOrders")
     } else {
       console.log('Order not found');
     }
@@ -485,7 +496,7 @@ app.post("/", function(req,res){
      
       if(err){
          console.log(err);
-         res.render("birdie",{signText:err});
+         res.render("birdie",{signText:"Something went wrong!"});
          
      }
      else{
