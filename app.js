@@ -344,26 +344,16 @@ app.post("/addtocart", async function (req, res) {
   });*/
   
 
-
-  app.post("/deletefromcart", async function (req, res) {
-    var itemToDelete = req.body.itemName;
+  app.post("/deletefromcart", function (req, res) {
+    var itemToDelete = req.body.itemName
     console.log(req.body.itemName);
-    const cartItem = await req.user.cart.find(
-      (item) => item._id.toString() === itemToDelete
-    ).exec();
-  
+    const cartItem = req.user.cart.find(item => item._id.toString() === itemToDelete);
+
     console.log(cartItem);
-    req.user.cart = req.user.cart.filter((item) => item !== cartItem);
-    
-    try {
-      await req.user.save(); // Wait for the user document to be saved
-      res.redirect("/home");
-    } catch (error) {
-      // Handle error during user document saving
-      console.log(error);
-      res.redirect("/home");
-    }
-  });
+    req.user.cart = req.user.cart.filter(item => item !== cartItem);
+    req.user.save();
+    res.redirect("/home");
+})
   
 app.post("/deletefrommenu", function (req, res) {
   var itemToDelete = req.body.itemName
