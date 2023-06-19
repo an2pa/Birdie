@@ -1,82 +1,41 @@
-
+const User = require('./database/models/users');
+const Menu = require('./database/models/menu');
+const Order = require('./database/models/orders');
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const request = require("request");
-const mongodb = require("mongodb");
-const mongoose = require("mongoose");
 const _ = require("lodash");
-
 const multer = require('multer');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
-
+const { connectDB } = require("./database/db");
 const session=require("express-session")
 const passport=require("passport")
-const passportLocalMongoose=require("passport-local-mongoose")
-const LocalStrategy = require('passport-local').Strategy;
-
-const flash = require('connect-flash');
-const { uniq } = require("lodash");
-app.use(flash());
-
+const axios = require("axios");
 
 
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use(session({
     secret:"Our little secret",
     resave:false,
     saveUninitialized: false
 
 }))
-
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
-    res.locals.messages = req.flash();
-    next();
-  });
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb+srv://admin-anes:test123@cluster0.qzhtq9v.mongodb.net/birdieDB');
-        console.log("MongoDB connected");
-    } catch (err) {
-        console.log("Failed", err);
-    }
-}
+
+
+
 connectDB();
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    phoneNo: Number,
-    address: String,
-    password: String,
-    cart: [
-        {
-            url:String,
-            title: String,
-            price: Number,
-            description: String
-        }
-    ],
-    role:String
-});
-
-userSchema.plugin(passportLocalMongoose);
-
-const User = mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -84,34 +43,9 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
-const menuSchema = new mongoose.Schema({
-    url: String,
-    type: String,
-    title: String,
-    price: Number,
-    description: String
-});
-
-const orderSchema = new mongoose.Schema({
-
-    phoneno: String,
-    address: String,
-    username: String,
-    cart: [
-        {
-            url:String,
-            title: String,
-            price: Number,
-            description: String
-        }
-    ],
-    message: String
-
-});
 
 
-const Menu = mongoose.model("Menu", menuSchema);
-const Order = mongoose.model("Order", orderSchema);
+
 
 
 app.get("/", function (req, res) {
@@ -131,36 +65,29 @@ app.get("/adminLogin", function (req, res) {
 })
 
 app.get("/home", function (req, res) {
-    const promise = Menu.find().exec();
-    promise.then(function (doc) {
-       // console.log(doc)
-        const sandwichDocs = doc.filter(item => item.type === 'sandwich');
-       // console.log(sandwichDocs);
-        const chickenDocs = doc.filter(item => item.type === 'chicken');
-       // console.log(chickenDocs);
-        const pastaDocs = doc.filter(item => item.type === 'pasta');
-       // console.log(pastaDocs);
-        const pizzaDocs = doc.filter(item => item.type === 'pizza');
-      //  console.log(pizzaDocs);
-        const beefDocs = doc.filter(item => item.type === 'beef');
-     //   console.log(beefDocs);
-        const burgerDocs = doc.filter(item => item.type === 'burger');
-     //   console.log(burgerDocs);
-     
-       
-        //cart
-        if (req.isAuthenticated()) {
-          const cartItems = req.user.cart.filter(item => item !== null);
-        console.log(cartItems); 
-            console.log("authetnic")
-            res.render("home", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: cartItems })
-        }
-        else {
-            console.log("not")
-            res.render("home", { url: "/login", buttonText: "Login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: [] })
-        }
-    })
-
+  axios.get("http://localhost:5000/menu")
+        .then(function (response) {
+            const menu = response.data;
+            const sandwichDocs = menu.filter(item => item.type === 'sandwich');
+            const chickenDocs = menu.filter(item => item.type === 'chicken');
+            const pastaDocs = menu.filter(item => item.type === 'pasta');
+            const beefDocs = menu.filter(item => item.type === 'beef');
+            const burgerDocs = menu.filter(item => item.type === 'burger');
+            const pizzaDocs = menu.filter(item => item.type === 'pizza');
+            if (req.isAuthenticated()) {
+              const cartItems = req.user.cart.filter(item => item !== null);
+            console.log(cartItems); 
+                console.log("authetnic")
+                res.render("home", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: cartItems })
+            }
+            else {
+                console.log("not")
+                res.render("home", { url: "/login", buttonText: "Login", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: [] })
+            }
+        })
+        .catch(function (error) {
+            console.error("Error:", error.message);
+        });  
 })
 app.get("/logout", function (req, res) {
     req.logout(function (err) {
@@ -179,25 +106,16 @@ app.get("/adminLogout", function (req, res) {
 })
 app.get("/adminView", function (req, res) {
   if (req.isAuthenticated() && req.user.role === "admin") {
-    const promise = Menu.find().exec();
-    const promise1 = Order.find({ message: "Pending" }).exec();
+    
     const adminName = req.user.username;
-    const orderCountPromise = Order.countDocuments({ message: "Pending"}).exec(); // Use a promise for countDocuments
-
-    Promise.all([promise, promise1, orderCountPromise])
-      .then(function ([menu, orders, orderCount]) {
-        console.log(orderCount); // Log the order count
-
+    const orderCountPromise = Order.countDocuments({ message: "Pending"}).exec().then(
+      function(doc){
         res.render("adminview", {
-          menu: menu,
-          orders: orders,
           adminName: adminName,
-          orderCount: orderCount,
+          orderCount: doc,
         });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      }
+    ); 
   } else {
     res.redirect("/adminLogin");
   }
@@ -214,30 +132,29 @@ app.get("/adminOrders", function(req,res){
 
 
 app.get("/adminMenu",function(req,res){
-  const promise = Menu.find().exec();
-    promise.then(function (doc) {
-       // console.log(doc)
-        const sandwichDocs = doc.filter(item => item.type === 'sandwich');
-       // console.log(sandwichDocs);
-        const chickenDocs = doc.filter(item => item.type === 'chicken');
-       // console.log(chickenDocs);
-        const pastaDocs = doc.filter(item => item.type === 'pasta');
-       // console.log(pastaDocs);
-        const pizzaDocs = doc.filter(item => item.type === 'pizza');
-      //  console.log(pizzaDocs);
-        const beefDocs = doc.filter(item => item.type === 'beef');
-     //   console.log(beefDocs);
-        const burgerDocs = doc.filter(item => item.type === 'burger');
-     //   console.log(burgerDocs);
-        if (req.isAuthenticated()&&req.user.role==="admin") {
-            console.log("authetnic")
-            res.render("adminmenu", {sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs })
-        }
-        else {
-            console.log("not")
-           res.redirect("/adminLogin")
-        }
-      })
+  axios.get("http://localhost:5000/menu")
+  .then(function (response) {
+      const menu = response.data;
+      const sandwichDocs = menu.filter(item => item.type === 'sandwich');
+      const chickenDocs = menu.filter(item => item.type === 'chicken');
+      const pastaDocs = menu.filter(item => item.type === 'pasta');
+      const beefDocs = menu.filter(item => item.type === 'beef');
+      const burgerDocs = menu.filter(item => item.type === 'burger');
+      const pizzaDocs = menu.filter(item => item.type === 'pizza');
+      if (req.isAuthenticated()&&req.user.role=="admin") {
+        const cartItems = req.user.cart.filter(item => item !== null);
+      console.log(cartItems); 
+          console.log("authetnic")
+          res.render("adminmenu", { url: "/logout", buttonText: "Logout", sandwich: sandwichDocs, chicken: chickenDocs, pasta: pastaDocs, pizza: pizzaDocs, burger: burgerDocs, beef: beefDocs, cart: cartItems })
+      }
+      else {
+          console.log("not")
+          res.redirect("/adminLogin")
+      }
+  })
+  .catch(function (error) {
+      console.error("Error:", error.message);
+  });
 })
 
 
@@ -325,23 +242,7 @@ app.post("/addtocart", async function (req, res) {
 });
 
   
-/*app.post("/addtocart", function (req, res) {
-    if (req.isAuthenticated()) {
-      const promise = Menu.find().exec();
-      promise.then(function (doc) {
-        const cartDoc = doc.find(item => item.title === req.body.itemName);
-        const cart=new Cart({
-            title:cartDoc.title,
-            price:cartDoc.price,
-            description:cartDoc.description
-        })
-        cart.save();
-        res.redirect("/cart")
-      });
-    } else {
-      res.redirect("/login");
-    }
-  });*/
+
   
 
   app.post("/deletefromcart", function (req, res) {
@@ -360,15 +261,8 @@ app.post("/deletefrommenu", function (req, res) {
   console.log(req.body.itemName);
   const deleteF=Menu.findOneAndDelete({_id: itemToDelete}).exec();
   deleteF.then(function(doc){
-   // console.log("Successfully deleted "+doc.title)
-})
   
-/*
-  const cartItem = Menu.findOneAndDelete(item => item._id.toString() === itemToDelete);
-
-  console.log(cartItem);
-  req.user.cart = req.user.cart.filter(item => item !== cartItem);
-  req.user.save();*/
+})
   res.redirect("/adminMenu");
 })
 
